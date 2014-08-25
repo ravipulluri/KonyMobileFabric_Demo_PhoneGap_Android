@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    	<meta name="format-detection" content="telephone=no">
+		<title>SalesForce CRM</title>
+		
+		<!-- Bootstrap -->
+	    <link type="text/css" href="css/kony.css" rel="stylesheet">
+	    
+	    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	    <script type="text/javascript" src="js/lib/jquery.min.js"></script>
+	    <script type="text/javascript" src="js/kony.js"></script>
+		<script type="text/javascript" src="js/opportunityDetails.js"></script>
+		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+		  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+		<script type="text/javascript">
+		$(function(){
+			/* fixed header height */ 
+			$('section').css( "padding-top", $("header").height() );
+		});
+		</script>
+	</head>
+	
+	<body>
+		<!-- header start here -->
+		<header class="bg-secondary">
+		
+			<div class="top-links">
+				<a class="back-but" href="opportunitiesList.html"><img src="images/back.png" alt="Home" /> <span>Opportunities</span></a>
+				<a class="home-but" href="dashboard.html"><img src="images/home.png" alt="Home" /></a>
+			</div>
+			
+			<div class="header-media-list">
+				<a href="#" class="pull-left br-none"><img id="probabilityImageDisplay" src="images/p0.png" alt="" /></a>
+				<div class="media">
+					<div class="media-body">
+						<h2 class="media-heading" id="opportunityNameDisplay" ><!--  dynamic data come here --></h2>                
+						<h3 id="opportunityTypeDisplay" ><!--  dynamic data come here --></h3>
+						<p id="accountNameDisplay"><!--  dynamic data come here --></p>
+					</div>
+				</div>
+			</div>
+		
+			<div class="navigation bg-info">
+				<ul>
+					<li><a href="#"><img id="opportunityFavoriteStatus" src="images/star.png" alt="" /></a></li>
+				</ul>
+			</div>
+			
+			<div class="details bg-info">
+			   <h3>Details</h3>
+			</div>
+			
+		</header>
+		<!-- header end here -->
+		
+		<!-- content list view start -->
+		<section >
+			<div class="scrollable-content">
+				<ul class="list-group page-detail">
+				
+					<li>
+						<div class="media-list">
+							<div class="media">
+								<div class="media-body">
+									<p>Amount</p>
+									<h2 class="media-heading" id="amountDisplay"><!--  dynamic data come here --></h2>
+								</div>
+							</div>
+						</div>
+					</li>
+					
+					<li>
+						<div class="media-list">
+							<div class="media">
+								<div class="media-body">
+									<p>Lead Source</p>
+									<h2 class="media-heading" id="leadSourceDisplay"><!--  dynamic data come here --></h2>           
+								</div>
+							</div>
+						</div>
+					</li>
+					
+					<li>
+						<div class="media-list">
+							<div class="media">
+								<div class="media-body">
+									<p>Close Date</p>
+									<h2 class="media-heading" id="closeDateDisplay"><!--  dynamic data come here --></h2>              
+								</div>
+							</div>
+						</div>
+					</li>
+					
+					<li class="border-last" >
+						<div class="media-list">
+							<div class="media">
+								<div class="media-body">
+									<p>Expected revenue</p>
+									<h2 class="media-heading" id="expectedRevenueDisplay"><!--  dynamic data come here --></h2>
+								</div>
+							</div>
+						</div>
+					</li> 
+				
+				</ul>
+			</div>
+		</section>  
+		<!-- content list view end -->
+		
+	</body>
+</html>

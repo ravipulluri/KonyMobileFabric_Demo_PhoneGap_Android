@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>SalesForce CRM</title>
+
+   <!-- Bootstrap -->
+    <link type="text/css" href="css/kony.css" rel="stylesheet">
+    <link type="text/css" href="css/ui.switchbutton.css" rel="stylesheet">
+    
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script type="text/javascript" src="js/lib/jquery.min.js"></script>
+    <script type="text/javascript" src="js/kony.js"></script>
+    
+    <script type="text/javascript" src="js/login.js"></script>
+    <script type="text/javascript" src="js/lib/crypt.js"></script>
+    <script type="text/javascript" src="js/lib/PushNotification.js"></script>
+    <script type="text/javascript" src="cordova.js"></script> 
+    <script type="text/javascript">
+    $(function(){	
+		$(".common:checkbox").switchbutton();
+	});
+    </script>
+    
+    <script type="text/javascript">
+            var pushNotification;
+            
+            function onDeviceReady() {
+			
+				try 
+				{ 
+                	pushNotification = window.plugins.pushNotification;
+                	if (device.platform == 'android' || device.platform == 'Android' ||
+                            device.platform == 'amazon-fireos' ) {
+			pushNotification.register(successHandler, errorHandler, {"senderID":"661780372179","ecb":"onNotification"});		// required!
+					} 
+                }
+				catch(err) 
+				{ 
+					alert(err.message); 
+				} 
+            }
+            
+            // handle APNS notifications for iOS
+            function onNotificationAPN(e) {
+                if (e.alert) {
+                     navigator.notification.alert(e.alert);
+                }
+                    
+                if (e.sound) {
+                    var snd = new Media(e.sound);
+                    snd.play();
+                }
+                
+                if (e.badge) {
+                    pushNotification.setApplicationIconBadgeNumber(successHandler, e.badge);
+                }
+            }
+            
+            // handle GCM notifications for Android
+            function onNotification(e) {
+                
+                switch( e.event )
+                {
+                    case 'registered':
+					if ( e.regid.length > 0 )
+					{
+						// Your GCM push server needs to know the regID before it can push to this device
+						// here is where you might want to send it the regID for later use.
+						console.log("regID = " + e.regid);
+						localStorage.regid = e.regid;
+						
+					}
+                    break;
+                    
+                    case 'message':
+                    	// if this flag is set, this notification happened while we were in the foreground.
+                    	// you might want to play a sound to get the user's attention, throw up a dialog, etc.
+                    	if (e.foreground)
+                    	{
+							   
+				           // on Android soundname is outside the payload. 
+			                // On Amazon FireOS all custom attributes are contained within payload
+			                var soundfile = e.soundname || e.payload.sound;
+			                // if the notification contains a soundname, play it.
+			                var my_media = new Media("/android_asset/www/"+ soundfile);
+
+							my_media.play();
+						}
+							
+						
+                    break;
+                    
+                    case 'error':
+						
+                    break;
+                    
+                    default:
+						
+                    break;
+                }
+            }
+            
+            function successHandler (result) {
+               
+            }
+            
+            function errorHandler (error) {
+            }
+            
+			document.addEventListener('deviceready', onDeviceReady, true);
+
+         </script>
+         
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body class="loginpage">
+   <section>
+   <div class="container">
+
+    <!-- login start here -->
+    <div class="login-section">
+     <h1>SalesForce CRM</h1>
+     <div id="registerId"></div>
+     <form role="form">
+        <div class="form-group email">
+          <input type="email" id="username" class="form-control"  placeholder="Username" value="dev.kony@popcornapps.com">
+        </div>
+        <div class="form-group pwd">
+          <input type="password" id="password" class="form-control"  placeholder="Password" value="PoP@123$S6O4pJrWQaDCATitqTRqdMjUv">
+        </div>
+        <div class="remember">
+            Remember Me <input id="rememberme" type="checkbox" class="common" /> 
+        </div>
+        <div id="login" type="submit" class="btn btn-primary">Sign in</div>
+      </form>
+     </div>
+
+    <!-- login end here -->
+    
+  </div>
+   </section>   
+    
+</body>
+</html>
